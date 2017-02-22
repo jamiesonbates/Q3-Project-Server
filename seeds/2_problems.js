@@ -1,13 +1,30 @@
+'use strict';
 
-exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+exports.seed = function(knex) {
+  return knex('problems').del()
+    .then(() => {
+      return knex('problems').insert([
+        {
+          id: 1,
+          user_id: 1,
+          description: 'This dog kennel is VERY noisy!',
+          lat: 47.618593,
+          lng: -122.325933
+        },
+        {
+          id: 2,
+          user_id 1,
+          description: 'There is always garbage everywhere and broken glass in this alley',
+          lat: 47.618889,
+          lng: -122.325828
+        },
+        {
+          id: 3,
+          user_id 1,
+          description: 'It is dangerous for cyclists here because of the train tracks in the road.',
+          lat: 47.599207,
+          lng: -122.332724
+        }
       ]);
     });
 };
