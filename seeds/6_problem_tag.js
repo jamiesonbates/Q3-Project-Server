@@ -1,13 +1,29 @@
+'use strict';
 
-exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+exports.seed = function(knex) {
+  return knex('problem_tag').del()
+    .then(() => {
+      return knex('problem_tag').insert([
+        {
+          id: 1,
+          prob_id: 1,
+          tag_id: 1
+        },
+        {
+          id: 2,
+          prob_id: 2,
+          tag_id: 4
+        },
+        {
+          id: 3,
+          prob_id: 3,
+          tag_id: 2
+        },
+        {
+          id: 4,
+          prob_id: 3,
+          tag_id: 3
+        }
       ]);
     });
 };
