@@ -13,14 +13,14 @@ exports.seed = function(knex) {
         },
         {
           id: 2,
-          user_id 1,
+          user_id: 1,
           description: 'There is always garbage everywhere and broken glass in this alley',
           lat: 47.618889,
           lng: -122.325828
         },
         {
           id: 3,
-          user_id 1,
+          user_id: 1,
           description: 'It is dangerous for cyclists here because of the train tracks in the road.',
           lat: 47.599207,
           lng: -122.332724
