@@ -1,5 +1,6 @@
 'use strict';
 
+const boom = require('boom');
 const bcrypt = require('bcrypt-as-promised');
 const router = require('express').Router();
 const knex = require('../../knex');
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
 
 /*
   ------------------------------------------------------------------------------
-  Users
+  User Registration and Authentication
   ------------------------------------------------------------------------------
 */
 
@@ -31,6 +32,38 @@ router.post('/users', (req, res, next) => {
       delete user.h_pw;
 
       res.send(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.post('/token', (req, res, next) => {
+  let user;
+
+  const { email, password } = req.body;
+  console.log(email, password);
+
+  knex('users')
+    .where('email', email)
+    .first()
+    .then((row) => {
+      if (!row) {
+        throw boom.create(400, 'Bad email or password');
+      }
+
+      user = row;
+      console.log(user);
+
+      return bcrypt.compare(password, user.h_pw);
+    })
+    .then(() => {
+      delete user.h_pw;
+
+      res.send(user);
+    })
+    .catch(bcrypt.MISMATCH_ERROR, () => {
+      throw boom.create(400, 'Bad email or password');
     })
     .catch((err) => {
       next(err);
