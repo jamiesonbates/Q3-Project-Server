@@ -3,6 +3,21 @@ label {
   margin-bottom: 15px;
 }
 
+.Register-Header {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 5px;
+  margin-bottom: 14px;
+}
+
+.Register-Header h2 {
+  margin: 2px 0px 0px 45px;
+}
+
+.Register-LeftArrow {
+  font-size: 30px;
+}
+
 .Register-Form {
   align-items: center;
   display: flex;

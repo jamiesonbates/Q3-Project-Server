@@ -40,16 +40,17 @@ class Login extends Component {
     });
   }
 
-  handleRegisterClick() {
-    // open modal registration form
-
+  handleRegisterClick(bool) {
     if (!this.state.modalOpen) {
       this.setState({
-        modalOpen: true
+        modalOpen: bool
       });
     }
-
-    console.log('clicked');
+    else {
+      this.setState({
+        modalOpen: bool
+      });
+    }
   }
 
   render() {
@@ -70,7 +71,7 @@ class Login extends Component {
         isOpen={this.state.modalOpen}
         style={customStyles}
       >
-        <Register />
+        <Register modalClose={this.handleRegisterClick} />
       </Modal>
       <div className="Login-Logo f2">
         <p>APP NAME</p>
@@ -110,13 +111,15 @@ class Login extends Component {
             Login
           </button>
         </form>
-        <p>Not a user?
+        <p>No account? No problem!
           <a
             className="Login-Link"
-            href="#!" onClick={this.handleRegisterClick}
+            href="#!"
+            onClick={() => this.handleRegisterClick(true)}
           >
-            Register for free!
+            Register for free
           </a>
+          and join the community.
         </p>
       </div>
     </div>
