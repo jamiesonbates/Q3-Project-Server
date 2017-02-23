@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 import UserIcon from 'react-icons/lib/ti/group-outline';
 import PwIcon from 'react-icons/lib/ti/key-outline';
+import Register from './Register/Register';
 import './Login.css';
 
 class Login extends Component {
@@ -9,7 +11,8 @@ class Login extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      modalOpen: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,7 +32,7 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    // axios POST to add username
+    // axios POST to token route
 
     this.setState({
       username: '',
@@ -40,11 +43,35 @@ class Login extends Component {
   handleRegisterClick() {
     // open modal registration form
 
+    if (!this.state.modalOpen) {
+      this.setState({
+        modalOpen: true
+      });
+    }
+
     console.log('clicked');
   }
 
   render() {
+    const customStyles = {
+      overlay: {
+        position: 'fixed',
+        backgroundColor: 'rgba(30, 30, 30, 0.75)',
+      },
+      content: {
+        // backgroundColor: '#5294d9',
+        width: '80%',
+      }
+    };
+
     return <div>
+      <Modal
+        contentLabel="Modal"
+        isOpen={this.state.modalOpen}
+        style={customStyles}
+      >
+        <Register />
+      </Modal>
       <div className="Login-Logo f2">
         <p>APP NAME</p>
       </div>

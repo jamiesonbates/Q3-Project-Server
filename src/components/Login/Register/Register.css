@@ -1,0 +1,26 @@
+label {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.Register-Form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+}
+
+.Register-Input {
+  border: 0;
+  border-bottom: 2px solid black;
+  font-size: 1rem;
+  margin: 7px 0px 7px 0px;
+  padding: 0px 3px;
+  width: 100%;
+}
+
+.Register-Button {
+  background-color: white;
+  border: 1px solid black;
+  width: 40%;
+}
