@@ -20,7 +20,8 @@ exports.up = function(knex) {
       .defaultTo('http://www.aspirehire.co.uk/aspirehire-co-uk/_img/profile.svg');
     table
       .string('address')
-      .notNullable();
+      .notNullable()
+      .defaultTo('');
     table
       .timestamps(true, true);
   });

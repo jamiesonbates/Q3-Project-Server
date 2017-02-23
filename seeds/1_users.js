@@ -18,6 +18,9 @@ exports.seed = function(knex) {
           h_pw: 'password',
           address: '100 Jackson Street, Seattle, WA, 98102'
         }
-      ]);
+      ])
+      .then(() => {
+          return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));");
+        });
     });
 };
