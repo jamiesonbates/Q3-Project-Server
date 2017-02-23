@@ -35,8 +35,6 @@ class Register extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    console.log(this.state);
-
     // axios POST to register new user
 
     this.setState({
