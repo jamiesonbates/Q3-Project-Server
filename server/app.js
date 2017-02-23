@@ -2,6 +2,13 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
+const cookieParser = require('cookie-parser');
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+app.use(cookieParser());
 
 app.disable('x-powered-by');
 

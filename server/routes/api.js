@@ -2,8 +2,10 @@
 
 const boom = require('boom');
 const bcrypt = require('bcrypt-as-promised');
-const router = require('express').Router();
+const jwt = require('jsonwebtoken');
 const knex = require('../../knex');
+const router = require('express').Router();
+
 
 router.get('/', (req, res) => {
   res.send('Hi from API!');
@@ -58,6 +60,17 @@ router.post('/token', (req, res, next) => {
       return bcrypt.compare(password, user.h_pw);
     })
     .then(() => {
+      const claim = { userId: user.id };
+      const token = jwt.sign(claim, process.env.JWT_KEY, {
+        expiresIn: '30 days'
+      });
+
+      res.cookie('token', token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+        secure: router.get('env') === 'production'
+      });
+
       delete user.h_pw;
 
       res.send(user);
