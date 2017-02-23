@@ -1,0 +1,52 @@
+.Login-FormContainer {
+  height: 100%;
+  padding: 6% 8% 10% 8%;
+  width: 100%;
+}
+
+.Login-Logo {
+  border: 1px solid black;
+  float: left;
+  position: absolute;
+  text-align: center;
+  top: 60px;
+  width: 100%;
+}
+
+.Login-Hero {
+  background: url('./images/hero.jpg');
+  background-size: cover;
+  height: 17rem;
+  width: 100%;
+}
+
+.Login-Form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Login-Icon {
+  color: lightblue;
+}
+
+.Login-Input {
+  border: 1px solid black;
+  margin: 5px 0px 5px 5px;
+  width: 80%;
+}
+
+.Login-Button {
+  border: 1px solid black;
+  margin: 2px 0px;
+  width: 20%;
+}
+
+.Login-Link {
+  color: lightblue;
+  margin-left: 4px;
+  text-decoration: none;
+}
+
+.Login-Link:hover {
+  cursor: pointer;
+}
