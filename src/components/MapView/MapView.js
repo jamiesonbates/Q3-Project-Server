@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Nav from '../Nav/Nav';
 import { GoogleMap, withGoogleMap } from 'react-google-maps';
+import Nav from '../Nav/Nav';
+import retro from './style';
 
 const Map = withGoogleMap(props => {
   return <div>
@@ -12,6 +13,7 @@ const Map = withGoogleMap(props => {
       defaultOptions={{
         streetViewControl: false,
         maxZoom: 10,
+        styles: props.styles
       }}
     >
     </GoogleMap>
@@ -48,6 +50,7 @@ class MapView extends Component {
         onMapClick={this.handleMapClick}
         center={{lat: 47.616757, lng: -122.338063}}
         zoom={10}
+        styles={retro}
       />
     </div>
   }
