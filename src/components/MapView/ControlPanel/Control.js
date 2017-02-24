@@ -4,7 +4,6 @@ import TrendingIcon from 'react-icons/lib/ti/chart-line-outline';
 import ReportIcon from 'react-icons/lib/ti/warning-outline';
 import ProfileIcon from 'react-icons/lib/ti/user-outline';
 
-
 const Control = (props) => {
   return <div className="Control-Floated">
     <div className="Control-Panel">
