@@ -12,7 +12,6 @@ const Map = withGoogleMap(props => {
       zoom={props.zoom}
       defaultOptions={{
         streetViewControl: false,
-        maxZoom: 10,
         styles: props.styles
       }}
     >
