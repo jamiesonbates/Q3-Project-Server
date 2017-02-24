@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleMap, withGoogleMap } from 'react-google-maps';
 import Nav from '../Nav/Nav';
+import Control from './ControlPanel/Control';
 import retro from './style';
 
 const Map = withGoogleMap(props => {
@@ -11,8 +12,11 @@ const Map = withGoogleMap(props => {
       center={props.center}
       zoom={props.zoom}
       defaultOptions={{
+        fullscreenControl: false,
+        mapTypeControl: false,
         streetViewControl: false,
-        styles: props.styles
+        styles: props.styles,
+        zoomControl: false
       }}
     >
     </GoogleMap>
@@ -43,7 +47,7 @@ class MapView extends Component {
     return <div>
       <Nav />
       <Map
-        containerElement={<div style={{ height: `500px`, width: `100%` }} />}
+        containerElement={<div style={{ height: `100vh`, width: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
         onMapMounted={this.handleMapMounted}
         onMapClick={this.handleMapClick}
@@ -51,6 +55,7 @@ class MapView extends Component {
         zoom={10}
         styles={retro}
       />
+      <Control />
     </div>
   }
 }
