@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import './Nav.css';
 
-function Nav(props) {
+const Nav = (props) => {
   return <div
       className="w-100 Nav-Container"
     >
