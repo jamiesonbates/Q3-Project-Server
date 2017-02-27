@@ -10,7 +10,7 @@
   },
   "engines": {
   "node": "7.4.0"
-  }
+  },
   "dependencies": {
     "axios": "^0.15.3",
     "bcrypt-as-promised": "^1.1.0",
