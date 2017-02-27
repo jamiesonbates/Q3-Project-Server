@@ -23,7 +23,7 @@ router.post('/users', (req, res, next) => {
 
   bcrypt.hash(password, 12)
     .then((h_pw) => {
-      return knex('users').insert({ username: username, email: email, h_pw: h_pw, img_url: img_url, address: address }, '*');
+      return knex('users').insert({ username: username, email: email, h_pw: h_pw, address: address }, '*');
     })
     .then((users) => {
       const user = users[0];
