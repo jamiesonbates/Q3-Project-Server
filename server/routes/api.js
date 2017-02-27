@@ -21,9 +21,9 @@ router.get('/', (req, res) => {
 router.post('/users', (req, res, next) => {
   const { username, email, password, img_url, address } = req.body;
 
-  bcrypt.hash(password, 12)
-    .then((h_pw) => {
-      return knex('users').insert({ username: username, email: email, h_pw: h_pw, img_url: img_url, address: address }, '*');
+  bcyrpt.genSalt(12, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      return knex('users').insert({ username: username, email: email, h_pw: hash, img_url: img_url, address: address }, '*');
     })
     .then((users) => {
       const user = users[0];
@@ -35,6 +35,7 @@ router.post('/users', (req, res, next) => {
     .catch((err) => {
       next(err);
     });
+  })
 });
 
 router.post('/token', (req, res, next) => {
