@@ -19,11 +19,11 @@ router.get('/', (req, res) => {
 
 // Register 1 User
 router.post('/users', (req, res, next) => {
-  const { username, email, password, address } = req.body;
+  const { username, email, password, img_url, address } = req.body;
 
   bcrypt.hash(password, 12)
     .then((h_pw) => {
-      return knex('users').insert({ username: username, email: email, h_pw: h_pw, address: address }, '*');
+      return knex('users').insert({ username: username, email: email, h_pw: h_pw, img_url: img_url, address: address }, '*');
     })
     .then((users) => {
       const user = users[0];
