@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 // Register 1 User
 router.post('/users', (req, res, next) => {
-  const { username, email, password, img_url, address } = req.body;
+  const { username, email, password, address } = req.body;
 
   bcrypt.hash(password, 12)
     .then((h_pw) => {
