@@ -95,15 +95,24 @@ router.post('/token', (req, res, next) => {
   ------------------------------------------------------------------------------
 */
 
-// router.get('/markers', (req, res, next) => {
-//   const { userId } = req.body;
-//
-//   knex('problems').where('user_id', userId)
-//     .then((problems) => {
-//       knex('verifications').where('user_id', userId)
-//         .then((verifications) => {
-//         })
-//     })
-// })
+router.get('/markers', (req, res, next) => {
+  const { lat, lng } = req.body;
+
+  const lat1 = parseFloat(lat) + 0.2;
+  const lat2 = parseFloat(lat) - 0.2;
+
+  const lng1 = parseFloat(lng) + 0.2;
+  const lng2 = parseFloat(lng) - 0.2;
+
+  knex('problems')
+    .whereBetween('lat', [Math.min(lat1, lat2), Math.max(lat1, lat2)])
+    .whereBetween('lng', [Math.min(lng1, lng2), Math.max(lng1, lng2)])
+    .then((problems) => {
+      res.send(problems)
+    })
+    .catch((err) => {
+      next(err);
+    })
+})
 
 module.exports = router
