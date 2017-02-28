@@ -28,6 +28,13 @@ router.post('/users', (req, res, next) => {
     .then((users) => {
       const user = users[0];
 
+      const claim = { userId: user.id };
+      const token = jwt.sign(claim, process.env.JWT_KEY, {
+        expiresIn: '30 days'
+      });
+
+      user.token = token;
+
       delete user.h_pw;
 
       res.send(user);
