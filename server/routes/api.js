@@ -62,11 +62,13 @@ router.post('/token', (req, res, next) => {
         expiresIn: '30 days'
       });
 
-      res.cookie('token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        secure: router.get('env') === 'production'
-      });
+      // res.cookie('token', token, {
+      //   httpOnly: true,
+      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      //   secure: router.get('env') === 'production'
+      // });
+
+      user.token = token;
 
       delete user.h_pw;
 
