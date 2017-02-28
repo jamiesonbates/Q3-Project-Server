@@ -89,4 +89,23 @@ router.post('/token', (req, res, next) => {
     });
 });
 
+/*
+  ------------------------------------------------------------------------------
+  Markers
+  ------------------------------------------------------------------------------
+*/
+
+router.get('/markers', (req, res, next) => {
+  const { userId } = req.body;
+
+  knex('problems').where('user_id', userId)
+    .then((problems) => {
+      console.log(problems);
+      knex('verifications').where('user_id', userId)
+        .then((verifications) => {
+          console.log(verifications);
+        })
+    })
+})
+
 module.exports = router
