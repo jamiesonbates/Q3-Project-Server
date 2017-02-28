@@ -95,17 +95,15 @@ router.post('/token', (req, res, next) => {
   ------------------------------------------------------------------------------
 */
 
-router.get('/markers', (req, res, next) => {
-  const { userId } = req.body;
-
-  knex('problems').where('user_id', userId)
-    .then((problems) => {
-      console.log(problems);
-      knex('verifications').where('user_id', userId)
-        .then((verifications) => {
-          console.log(verifications);
-        })
-    })
-})
+// router.get('/markers', (req, res, next) => {
+//   const { userId } = req.body;
+//
+//   knex('problems').where('user_id', userId)
+//     .then((problems) => {
+//       knex('verifications').where('user_id', userId)
+//         .then((verifications) => {
+//         })
+//     })
+// })
 
 module.exports = router
