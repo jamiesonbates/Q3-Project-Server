@@ -20,16 +20,13 @@ router.get('/', (req, res) => {
 // Register 1 User
 router.post('/users', (req, res, next) => {
   const { username, email, password, img_url, address } = req.body;
-  console.log(username, email, password, img_url, address);
 
   bcrypt.hash(password, 12)
     .then((h_pw) => {
-      console.log(username, email, h_pw, img_url, address);
       return knex('users').insert({ username: username, email: email, h_pw: h_pw, img_url: img_url, address: address }, '*');
     })
     .then((users) => {
       const user = users[0];
-      console.log(user);
 
       delete user.h_pw;
 
@@ -65,11 +62,13 @@ router.post('/token', (req, res, next) => {
         expiresIn: '30 days'
       });
 
-      res.cookie('token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        secure: router.get('env') === 'production'
-      });
+      // res.cookie('token', token, {
+      //   httpOnly: true,
+      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      //   secure: router.get('env') === 'production'
+      // });
+
+      user.token = token;
 
       delete user.h_pw;
 
