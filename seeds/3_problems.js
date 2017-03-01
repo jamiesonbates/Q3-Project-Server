@@ -7,7 +7,7 @@ exports.seed = function(knex) {
         {
           id: 1,
           user_id: 1,
-          title: 'Noisy Dog Kennel'
+          title: 'Noisy Dog Kennel',
           description: 'This dog kennel is VERY noisy!',
           lat: 47.599179,
           lng: -122.333789,
@@ -16,7 +16,7 @@ exports.seed = function(knex) {
         {
           id: 2,
           user_id: 1,
-          title: 'Broken Glass in Alley'
+          title: 'Broken Glass in Alley',
           description: 'There is always garbage everywhere and broken glass in this alley',
           lat: 47.598739,
           lng: -122.334136,
@@ -25,7 +25,7 @@ exports.seed = function(knex) {
         {
           id: 3,
           user_id: 1,
-          title: 'Cyclist: watch for train tracks'
+          title: 'Cyclist: watch for train tracks',
           description: 'It is dangerous for cyclists here because of the train tracks in the road.',
           lat: 47.600873,
           lng: -122.334115,

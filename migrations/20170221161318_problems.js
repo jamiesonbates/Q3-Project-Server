@@ -12,7 +12,7 @@ exports.up = function(knex) {
       .onDelete('CASCADE')
       .index();
     table
-      .string('name')
+      .string('title')
       .notNullable()
       .defaultTo('')
     table
