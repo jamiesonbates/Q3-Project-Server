@@ -149,4 +149,55 @@ router.post('/problem', (req, res, next) => {
   });
 });
 
+/*
+  ------------------------------------------------------------------------------
+  Create or change verification
+  ------------------------------------------------------------------------------
+*/
+
+router.post('/verification', (req, res, next) => {
+  const { userId, probId, verification } = req.body;
+
+  knex('verifications')
+    .where('user_id', userIdd)
+    .where('prob_id', probId)
+    .returning('*')
+    .then((oldVerification) => {
+      if (!oldVerification) {
+        knex('verifications').insert([
+          {
+            prob_id: probId,
+            user_id: userId,
+            verified: verification
+          }
+        ])
+        .returning('*')
+        .then((newVerification) => {
+          const newVerified = newVerification[0];
+          newVerified.newVerify = true;
+          res.send(newVerified);
+        })
+      }
+      else {
+        const oldVerified = oldVerification[0];
+
+        if (oldVerified.verified === verification) {
+          oldVerified.newVerify = false;
+          res.send(oldVerified);
+        }
+
+        knex('verifications')
+          .where('user_id', userId)
+          .where('prob_id', probId)
+          .update('verified', verification)
+          .returning('*')
+          .then((updatedVerification) => {
+            const updatedVerified = updatedVerification[0];
+            updatedVerified.newVerify = false;
+            res.send(updatedVerified);
+          });
+      }
+    });
+});
+
 module.exports = router;
