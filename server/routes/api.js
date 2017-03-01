@@ -106,9 +106,18 @@ router.get('/markers', (req, res, next) => {
   const lng2 = parseFloat(lng) - 0.2;
 
   knex('problems')
-    .whereBetween('lat', [Math.min(lat1, lat2), Math.max(lat1, lat2)])
-    .whereBetween('lng', [Math.min(lng1, lng2), Math.max(lng1, lng2)])
+    .select(
+      'problems.id as id',
+      'problems.user_id as userId',
+      'problems.descriptions as description',
+      'problems.lat as lat',
+      'problems.lng as lng',
+      'categories.category as category')
+    .innerJoin('categories', 'categories.id', 'problems.category_id')
+    .whereBetween('problems.lat', [Math.min(lat1, lat2), Math.max(lat1, lat2)])
+    .whereBetween('problems.lng', [Math.min(lng1, lng2), Math.max(lng1, lng2)])
     .then((problems) => {
+      console.log(problems);
       res.send(problems);
     })
     .catch((err) => {
