@@ -137,10 +137,13 @@ router.post('/problem', (req, res, next) => {
   knex('problems').insert([
     { user_id, title, description, lat, lng, category_id }
   ])
+  .returning('*')
   .then((problem) => {
-    console.log(problem);
+    res.send(problem[0]);
   })
-
-})
+  .catch((err) => {
+    next(err);
+  });
+});
 
 module.exports = router;
