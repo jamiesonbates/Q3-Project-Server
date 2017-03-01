@@ -19,11 +19,11 @@ router.get('/', (req, res) => {
 
 // Register 1 User
 router.post('/users', (req, res, next) => {
-  const { username, email, password, img_url, address } = req.body;
+  const { username, email, password, address } = req.body;
 
   bcrypt.hash(password, 12)
     .then((h_pw) => {
-      return knex('users').insert({ username: username, email: email, h_pw: h_pw, img_url: img_url, address: address }, '*');
+      return knex('users').insert({ username: username, email: email, h_pw: h_pw, address: address }, '*');
     })
     .then((users) => {
       const user = users[0];
@@ -96,6 +96,7 @@ router.post('/token', (req, res, next) => {
 */
 
 router.get('/markers', (req, res, next) => {
+  console.log(req.body.lat);
   const { lat, lng } = req.body;
 
   const lat1 = parseFloat(lat) + 0.2;
