@@ -109,6 +109,7 @@ router.post('/markers', (req, res, next) => {
     .select(
       'problems.id as id',
       'problems.user_id as userId',
+      'problems.title as title',
       'problems.description as description',
       'problems.lat as lat',
       'problems.lng as lng',
