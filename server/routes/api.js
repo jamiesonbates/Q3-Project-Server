@@ -109,11 +109,11 @@ router.get('/markers', (req, res, next) => {
     .whereBetween('lat', [Math.min(lat1, lat2), Math.max(lat1, lat2)])
     .whereBetween('lng', [Math.min(lng1, lng2), Math.max(lng1, lng2)])
     .then((problems) => {
-      res.send(problems)
+      res.send(problems);
     })
     .catch((err) => {
       next(err);
     })
 })
 
-module.exports = router
+module.exports = router;
