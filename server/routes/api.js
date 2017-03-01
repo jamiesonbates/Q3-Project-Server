@@ -95,7 +95,7 @@ router.post('/token', (req, res, next) => {
   ------------------------------------------------------------------------------
 */
 
-router.get('/markers', (req, res, next) => {
+router.post('/markers', (req, res, next) => {
   console.log(req.body.lat);
   const { lat, lng } = req.body;
 
