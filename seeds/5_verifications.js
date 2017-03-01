@@ -11,6 +11,9 @@ exports.seed = function(knex) {
           verified: true,
           comments: 'I agree that it is very dangerous to cycle on this road.'
         }
-      ]);
+      ])
+      .then(() => {
+          return knex.raw("SELECT setval('verifications_id_seq', (SELECT MAX(id) FROM verifications));");
+        });
     });
 };

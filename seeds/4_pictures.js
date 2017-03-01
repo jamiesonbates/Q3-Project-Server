@@ -22,6 +22,9 @@ exports.seed = function(knex) {
           img_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Pioneer_Square_Streetcar_Station_(14441361345).jpg/220px-Pioneer_Square_Streetcar_Station_(14441361345).jpg',
           description: 'Tracks at the station. Looks just like how they are on the street. Be carful!'
         }
-      ]);
+      ])
+      .then(() => {
+          return knex.raw("SELECT setval('pictures_id_seq', (SELECT MAX(id) FROM pictures));");
+        });
     });
 };

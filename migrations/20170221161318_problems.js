@@ -24,6 +24,13 @@ exports.up = function(knex) {
       .notNullable()
       .defaultTo(-122.162876);
     table
+      .integer('category_id')
+      .references('id')
+      .inTable('categories')
+      .notNullable()
+      .defaultTo(1)
+      .index();
+    table
       .timestamps(true, true);
   })
 };
