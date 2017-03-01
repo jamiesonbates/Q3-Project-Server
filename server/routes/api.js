@@ -113,8 +113,10 @@ router.post('/markers', (req, res, next) => {
       'problems.description as description',
       'problems.lat as lat',
       'problems.lng as lng',
+      'users.username as username',
       'categories.category as category')
     .innerJoin('categories', 'categories.id', 'problems.category_id')
+    .innerJoin('users', 'users.id', 'problems.user_id')
     .whereBetween('problems.lat', [Math.min(lat1, lat2), Math.max(lat1, lat2)])
     .whereBetween('problems.lng', [Math.min(lng1, lng2), Math.max(lng1, lng2)])
     .then((problems) => {
