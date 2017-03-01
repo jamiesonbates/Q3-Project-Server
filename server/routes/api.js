@@ -109,7 +109,7 @@ router.get('/markers', (req, res, next) => {
     .select(
       'problems.id as id',
       'problems.user_id as userId',
-      'problems.descriptions as description',
+      'problems.description as description',
       'problems.lat as lat',
       'problems.lng as lng',
       'categories.category as category')
