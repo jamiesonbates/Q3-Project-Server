@@ -8,14 +8,14 @@ exports.seed = function(knex) {
           id: 1,
           username: 'jamiesonbates',
           email: 'jamiesonbates@gmail.com',
-          h_pw: 'password',
+          h_pw: '$2a$12$enuFwD6k2m8uD9yN2OVcI.ExS1dWGdlTZ/YX2zmWTjS7X24Lo.Wye',
           address: '106 Bellevue Ave E, Apt 203, Seattle, WA, 98102'
         },
         {
           id: 2,
           username: 'minhchau',
           email: 'xiu.chau@gmail.com',
-          h_pw: 'password',
+          h_pw: '$2a$12$enuFwD6k2m8uD9yN2OVcI.ExS1dWGdlTZ/YX2zmWTjS7X24Lo.Wye',
           address: '100 Jackson Street, Seattle, WA, 98102'
         }
       ])
