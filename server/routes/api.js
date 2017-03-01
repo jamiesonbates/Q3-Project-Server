@@ -176,24 +176,6 @@ router.get('/verification/:userId/:probId', (req, res, next) => {
     });
 });
 
-router.patch('/verification', (req, res, next) => {
-  const { userId, probId, verification } = req.body;
-
-  knex('verifications')
-    .where('user_id', userId)
-    .where('prob_id', probId)
-    .update('verified', verification)
-    .returning('*')
-    .then((verification) => {
-      const newVerified = verification[0];
-
-      res.send(newVerified);
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
-
 router.post('/verification', (req, res, next) => {
   const { userId, probId, verification } = req.body;
 
@@ -214,5 +196,24 @@ router.post('/verification', (req, res, next) => {
     next(err);
   })
 });
+
+router.patch('/verification', (req, res, next) => {
+  const { userId, probId, verification } = req.body;
+
+  knex('verifications')
+    .where('user_id', userId)
+    .where('prob_id', probId)
+    .update('verified', verification)
+    .returning('*')
+    .then((verification) => {
+      const newVerified = verification[0];
+
+      res.send(newVerified);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 
 module.exports = router;
