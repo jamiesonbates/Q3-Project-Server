@@ -132,7 +132,15 @@ router.post('/markers', (req, res, next) => {
 */
 
 router.post('/problem', (req, res, next) => {
-  const 
+  const { user_id, title, description, lat, lng, category_id } = req.body;
+
+  knex('problems').insert([
+    { user_id, title, description, lat, lng, category_id }
+  ])
+  .then((problem) => {
+    console.log(problem);
+  })
+
 })
 
 module.exports = router;
