@@ -12,6 +12,10 @@ exports.up = function(knex) {
       .onDelete('CASCADE')
       .index();
     table
+      .string('name')
+      .notNullable()
+      .defaultTo('')
+    table
       .text('description')
       .notNullable()
       .defaultTo('');
