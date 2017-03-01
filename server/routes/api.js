@@ -155,49 +155,64 @@ router.post('/problem', (req, res, next) => {
   ------------------------------------------------------------------------------
 */
 
-router.post('/verification', (req, res, next) => {
+router.get('/verification/:userId/:probId', (req, res, next) => {
+  const { userId, probId } = req.params;
+
+  knex('verifications')
+    .where('user_id', userId)
+    .where('prob_id', probId)
+    .returning('*')
+    .then((verification) => {
+      if (verification) {
+        const verified = verification[0];
+        res.send(verified);
+      }
+      else {
+        res.send(false);
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.patch('/verification', (req, res, next) => {
   const { userId, probId, verification } = req.body;
 
   knex('verifications')
-    .where('user_id', userIdd)
+    .where('user_id', userId)
     .where('prob_id', probId)
+    .update('verified', verification)
     .returning('*')
-    .then((oldVerification) => {
-      if (!oldVerification) {
-        knex('verifications').insert([
-          {
-            prob_id: probId,
-            user_id: userId,
-            verified: verification
-          }
-        ])
-        .returning('*')
-        .then((newVerification) => {
-          const newVerified = newVerification[0];
-          newVerified.newVerify = true;
-          res.send(newVerified);
-        })
-      }
-      else {
-        const oldVerified = oldVerification[0];
+    .then((verification) => {
+      const newVerified = verification[0];
 
-        if (oldVerified.verified === verification) {
-          oldVerified.newVerify = false;
-          res.send(oldVerified);
-        }
-
-        knex('verifications')
-          .where('user_id', userId)
-          .where('prob_id', probId)
-          .update('verified', verification)
-          .returning('*')
-          .then((updatedVerification) => {
-            const updatedVerified = updatedVerification[0];
-            updatedVerified.newVerify = false;
-            res.send(updatedVerified);
-          });
-      }
+      res.send(newVerified);
+    })
+    .catch((err) => {
+      next(err);
     });
+});
+
+router.post('/verification', (req, res, next) => {
+  const { userId, probId, verification } = req.body;
+
+  knex('verifications').insert([
+    {
+      prob_id: probId,
+      user_id: userId,
+      verified: verification
+    }
+  ])
+  .returning('*')
+  .then((newVerification) => {
+    const newVerified = newVerification[0];
+
+    res.send(newVerified);
+  })
+  .catch((err) => {
+    next(err);
+  })
 });
 
 module.exports = router;
