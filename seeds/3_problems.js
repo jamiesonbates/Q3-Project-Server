@@ -25,6 +25,9 @@ exports.seed = function(knex) {
           lat: 47.599207,
           lng: -122.332724
         }
-      ]);
+      ])
+      .then(() => {
+          return knex.raw("SELECT setval('problems_id_seq', (SELECT MAX(id) FROM problems));");
+        });
     });
 };
