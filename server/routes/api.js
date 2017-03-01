@@ -163,7 +163,7 @@ router.get('/verification/:userId/:probId', (req, res, next) => {
     .where('prob_id', probId)
     .returning('*')
     .then((verification) => {
-      if (verification) {
+      if (verification[0]) {
         const verified = verification[0];
         res.send(verified);
       }
