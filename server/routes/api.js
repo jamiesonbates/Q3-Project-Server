@@ -155,6 +155,43 @@ router.post('/problem', (req, res, next) => {
   ------------------------------------------------------------------------------
 */
 
+router.get('/verificationsall/:probId', (req, res, next) => {
+  const { probId } = req.params;
+
+  let yes;
+  let no;
+
+  knex('verifications')
+    .count('verified as yes')
+    .where('prob_id', probId)
+    .where('verified', true)
+    .returning('*')
+    .then((yesVerification) => {
+      const yesCount = yesVerification[0];
+
+      yes = parseInt(yesCount.yes);
+
+      return knex('verifications')
+        .count('verified as no')
+        .where('prob_id', probId)
+        .where('verified', false)
+        .returning('*')
+    })
+    .then((noVerification) => {
+      const noCount = noVerification[0];
+
+      no = parseInt(noCount.no);
+
+      const total = no + yes;
+      const verified = { no, yes, total };
+
+      res.send(verified);
+    })
+    .catch((err) => {
+      next(err);
+    })
+});
+
 router.get('/verification/:userId/:probId', (req, res, next) => {
   const { userId, probId } = req.params;
 
