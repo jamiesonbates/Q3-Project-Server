@@ -95,6 +95,46 @@ router.post('/token', (req, res, next) => {
   ------------------------------------------------------------------------------
 */
 
+
+const getVerifications = function(problem) {
+  const probId = problem.id;
+  let yes;
+  let no;
+
+  const promise = new Promise((resolve, reject) => {
+    knex('verifications')
+    .count('verified as yes')
+    .where('prob_id', probId)
+    .where('verified', true)
+    .returning('*')
+    .then((yesVerification) => {
+      const yesCount = yesVerification[0];
+
+      yes = parseInt(yesCount.yes);
+
+      return knex('verifications')
+      .count('verified as no')
+      .where('prob_id', probId)
+      .where('verified', false)
+      .returning('*')
+    })
+    .then((noVerification) => {
+      const noCount = noVerification[0];
+
+      no = parseInt(noCount.no);
+
+      const total = no + yes;
+      problem.no = no;
+      problem.yes = yes;
+      problem.total = total;
+      // const verified = { no, yes, total };
+
+      resolve(problem)
+    })
+  })
+  return promise;
+}
+
 router.post('/markers', (req, res, next) => {
   console.log(req.body.lat);
   const { lat, lng } = req.body;
@@ -120,7 +160,14 @@ router.post('/markers', (req, res, next) => {
     .whereBetween('problems.lat', [Math.min(lat1, lat2), Math.max(lat1, lat2)])
     .whereBetween('problems.lng', [Math.min(lng1, lng2), Math.max(lng1, lng2)])
     .then((problems) => {
-      console.log(problems);
+      const result = [];
+
+      for (const problem of problems) {
+        result.push(getVerifications(problem));
+      }
+      return Promise.all(result);
+    })
+    .then((problems) => {
       res.send(problems);
     })
     .catch((err) => {
@@ -154,43 +201,6 @@ router.post('/problem', (req, res, next) => {
   Create or change verification
   ------------------------------------------------------------------------------
 */
-
-router.get('/verificationsall/:probId', (req, res, next) => {
-  const { probId } = req.params;
-
-  let yes;
-  let no;
-
-  knex('verifications')
-    .count('verified as yes')
-    .where('prob_id', probId)
-    .where('verified', true)
-    .returning('*')
-    .then((yesVerification) => {
-      const yesCount = yesVerification[0];
-
-      yes = parseInt(yesCount.yes);
-
-      return knex('verifications')
-        .count('verified as no')
-        .where('prob_id', probId)
-        .where('verified', false)
-        .returning('*')
-    })
-    .then((noVerification) => {
-      const noCount = noVerification[0];
-
-      no = parseInt(noCount.no);
-
-      const total = no + yes;
-      const verified = { no, yes, total };
-
-      res.send(verified);
-    })
-    .catch((err) => {
-      next(err);
-    })
-});
 
 router.get('/verification/:userId/:probId', (req, res, next) => {
   const { userId, probId } = req.params;
