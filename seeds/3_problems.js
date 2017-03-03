@@ -43,10 +43,10 @@ exports.seed = function(knex) {
         {
           id: 5,
           user_id: 3,
-          title: 'Bike Theft',
-          description: 'Someone smash the bike lock off my brand new Peugeot Du Monde. I\'ll miss you buddy. :(',
-          lat: 47.598166,
-          lng: -122.333203,
+          title: 'Laptop Stolen',
+          description: 'Someone walked off with my MacBook while I was looking the other way. I\'ll miss you buddy.. :(',
+          lat: 47.598944,
+          lng: -122.331473,
           category_id: 6
         },
         {
@@ -63,8 +63,8 @@ exports.seed = function(knex) {
           user_id: 5,
           title: 'Ugly Baby Here',
           description: 'There is an ugly baby located at this location. Very, very ugly.',
-          lat: 47.601506,
-          lng: -122.332999,
+          lat: 47.601416,
+          lng: -122.331782,
           category_id: 1
         }
       ])
