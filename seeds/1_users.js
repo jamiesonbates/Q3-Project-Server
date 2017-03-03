@@ -16,7 +16,28 @@ exports.seed = function(knex) {
           username: 'minhchau',
           email: 'xiu.chau@gmail.com',
           h_pw: '$2a$12$enuFwD6k2m8uD9yN2OVcI.ExS1dWGdlTZ/YX2zmWTjS7X24Lo.Wye',
-          address: '100 Jackson Street, Seattle, WA, 98102'
+          address: '123 Fake St, Seattle, WA, 98104'
+        },
+        {
+          id: 3,
+          username: 'g40student',
+          email: 'pro@amazon.com',
+          h_pw: '$2a$12$enuFwD6k2m8uD9yN2OVcI.ExS1dWGdlTZ/YX2zmWTjS7X24Lo.Wye',
+          address: '111 S Jackson St, Seattle, WA, 98104'
+        },
+        {
+          id: 4,
+          username: 'codergirl',
+          email: 'coder@girl.com',
+          h_pw: '$2a$12$enuFwD6k2m8uD9yN2OVcI.ExS1dWGdlTZ/YX2zmWTjS7X24Lo.Wye',
+          address: '111 S Jackson St, Seattle, WA, 98104'
+        },
+        {
+          id: 5,
+          username: 'homeless_man',
+          email: 'home@less.com',
+          h_pw: '$2a$12$enuFwD6k2m8uD9yN2OVcI.ExS1dWGdlTZ/YX2zmWTjS7X24Lo.Wye',
+          address: 'Everywhere'
         }
       ])
       .then(() => {
